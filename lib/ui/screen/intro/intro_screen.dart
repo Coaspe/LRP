@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lrp/styles/colors.dart';
 import 'package:lrp/styles/fonts.dart';
+import 'package:lrp/ui/common/login_input_field.dart';
+import 'package:lrp/ui/common/login_oauth_btn.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
 class IntroScreen extends StatefulWidget {
-  const IntroScreen({super.key, this.title});
-  final String? title;
+  const IntroScreen({super.key});
   @override
   State<IntroScreen> createState() => _IntroScreenState();
 }
@@ -14,6 +15,9 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   static LRPColors lrpColors = LRPColors();
   static LRPFonts lrpFonts = LRPFonts();
+  final _idController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   _buildCard({
     required Config config,
     Color? backgroundColor = Colors.transparent,
@@ -21,6 +25,7 @@ class _IntroScreenState extends State<IntroScreen> {
   }) {
     return Container(
         width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: lrpColors.introGradient,
@@ -40,20 +45,16 @@ class _IntroScreenState extends State<IntroScreen> {
       body: Stack(
         children: [
           Positioned(
-            left: 0,
-            top: 0,
-            child: Expanded(
-              child: _buildCard(
-                config: CustomConfig(
-                  colors: [
-                    Colors.white70,
-                    Colors.white54,
-                    Colors.white30,
-                    Colors.white24,
-                  ],
-                  durations: [32000, 21000, 18000, 5000],
-                  heightPercentages: [0.53, 0.55, 0.54, 0.53],
-                ),
+            child: _buildCard(
+              config: CustomConfig(
+                colors: [
+                  Colors.white70,
+                  Colors.white54,
+                  Colors.white30,
+                  Colors.white24,
+                ],
+                durations: [32000, 21000, 18000, 5000],
+                heightPercentages: [0.53, 0.55, 0.54, 0.53],
               ),
             ),
           ),
@@ -62,6 +63,63 @@ class _IntroScreenState extends State<IntroScreen> {
               child: Column(
                 children: [
                   Text("Login", style: lrpFonts.LoginTitle),
+                  Column(
+                    children: [
+                      LoginIDInputField(
+                          controller: _idController, placeholder: "ID를 입력하세요"),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      LoginPasswordInputField(
+                        controller: _passwordController,
+                        placeholder: "패스워드를 입력하세요",
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      SizedBox(
+                        width: 280,
+                        height: 50,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: lrpColors.accent2),
+                            onPressed: () => {},
+                            child: const Text(
+                              "Login",
+                              style: TextStyle(fontSize: 15),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          "비밀번호를 잊으셨나요?",
+                          style: TextStyle(color: lrpColors.greyMedium),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Expanded(
+                    child: GridView.count(
+                      childAspectRatio: 4,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      children: [
+                        LoginOauthBtn(
+                            text: "Kakao",
+                            imageUri: "assets/images/oauth/kakao-talk.png",
+                            color: lrpColors.kakao),
+                        LoginOauthBtn(
+                            text: "Google",
+                            imageUri: "assets/images/oauth/google.png",
+                            color: lrpColors.kakao)
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
