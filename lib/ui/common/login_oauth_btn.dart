@@ -13,18 +13,26 @@ class LoginOauthBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         child: Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(10), color: color),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5), color: color, boxShadow: []),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            imageUri,
-            width: 40,
+          Expanded(
+            child: Center(
+              child: Image.asset(
+                imageUri,
+                width: 24,
+              ),
+            ),
           ),
-          const SizedBox(
-            width: 5,
+          Expanded(
+            flex: 3,
+            child: Text(
+              'Login with $text',
+              style: const TextStyle(fontSize: 13),
+            ),
           ),
-          Text(text)
         ],
       ),
     ));

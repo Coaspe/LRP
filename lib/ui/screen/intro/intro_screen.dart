@@ -36,11 +36,14 @@ class _IntroScreenState extends State<IntroScreen> {
           backgroundColor: backgroundColor,
           backgroundImage: backgroundImage,
           size: const Size(double.infinity, double.infinity),
+          waveAmplitude: 4,
         ));
   }
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width.toString());
+    print(MediaQuery.of(context).size.height.toString());
     return Scaffold(
       body: Stack(
         children: [
@@ -48,8 +51,8 @@ class _IntroScreenState extends State<IntroScreen> {
             child: _buildCard(
               config: CustomConfig(
                 colors: [
-                  Colors.white70,
                   Colors.white54,
+                  const Color(0xffFFEAD2),
                   Colors.white30,
                   Colors.white24,
                 ],
@@ -60,67 +63,76 @@ class _IntroScreenState extends State<IntroScreen> {
           ),
           SafeArea(
             child: Center(
-              child: Column(
-                children: [
-                  Text("Login", style: lrpFonts.LoginTitle),
-                  Column(
-                    children: [
-                      LoginIDInputField(
-                          controller: _idController, placeholder: "ID를 입력하세요"),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      LoginPasswordInputField(
-                        controller: _passwordController,
-                        placeholder: "패스워드를 입력하세요",
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      SizedBox(
-                        width: 280,
-                        height: 50,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: lrpColors.accent2),
-                            onPressed: () => {},
-                            child: const Text(
-                              "Login",
-                              style: TextStyle(fontSize: 15),
-                            )),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        child: Text(
-                          "비밀번호를 잊으셨나요?",
-                          style: TextStyle(color: lrpColors.greyMedium),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Expanded(
-                    child: GridView.count(
-                      childAspectRatio: 4,
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
+              child: Container(
+                constraints:
+                    const BoxConstraints(maxHeight: 850, maxWidth: 400),
+                child: Column(
+                  children: [
+                    Text("Login", style: lrpFonts.LoginTitle),
+                    Column(
                       children: [
-                        LoginOauthBtn(
-                            text: "Kakao",
-                            imageUri: "assets/images/oauth/kakao-talk.png",
-                            color: lrpColors.kakao),
-                        LoginOauthBtn(
-                            text: "Google",
-                            imageUri: "assets/images/oauth/google.png",
-                            color: lrpColors.kakao)
+                        LoginIDInputField(
+                            controller: _idController,
+                            placeholder: "ID를 입력하세요"),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        LoginPasswordInputField(
+                          controller: _passwordController,
+                          placeholder: "패스워드를 입력하세요",
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        SizedBox(
+                          width: 280,
+                          height: 50,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: lrpColors.accent2),
+                              onPressed: () => {},
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(fontSize: 15),
+                              )),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          child: Text(
+                            "비밀번호를 잊으셨나요?",
+                            style: TextStyle(color: lrpColors.greyMedium),
+                          ),
+                        ),
                       ],
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    Expanded(
+                      child: GridView.count(
+                        childAspectRatio: 5,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        children: [
+                          LoginOauthBtn(
+                              text: "Kakao",
+                              imageUri: "assets/images/oauth/kakao-talk.png",
+                              color: lrpColors.kakao),
+                          LoginOauthBtn(
+                              text: "Google",
+                              imageUri: "assets/images/oauth/google.png",
+                              color: lrpColors.white),
+                          LoginOauthBtn(
+                              text: "Naver",
+                              imageUri: "assets/images/oauth/google.png",
+                              color: lrpColors.naver)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

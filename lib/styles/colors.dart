@@ -5,9 +5,10 @@ class LRPColors {
   final accent1 = const Color(0XFF66ccff);
   final accent2 = const Color(0XFF99CCFF);
   final List<Color> introGradient = const [
-    Color(0XFF66ccff),
-    Color(0XFF99CCFF),
-    Color(0xFFFFFFFF)
+    Color(0Xff8294C4),
+    Color(0xffACB1D6),
+    Color(0xffDBDFEA),
+    Color(0xffFFEAD2)
   ];
   final Color offWhite = const Color(0xFFF8ECE5);
   final Color caption = const Color(0xFF7D7873);
@@ -17,4 +18,5 @@ class LRPColors {
   final Color white = Colors.white;
   final Color black = const Color(0xFF1E1B18);
   final Color kakao = const Color(0xffffe812);
+  final Color naver = const Color(0xFF2DB400);
 }
